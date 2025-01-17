@@ -111,8 +111,8 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       kokoro-js:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.0.1
+        version: 1.0.1
       lucide-react:
         specifier: ^0.471.1
         version: 0.471.1(react@18.3.1)
@@ -2147,8 +2147,8 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  kokoro-js@1.0.0:
-    resolution: {integrity: sha512-BLLqa9fhJs7qpgAv8sQBBgTPim95bDiouGc9dm/DFtAIut9d5EOLlMUIWk1nifXzUjiIdgcSqYMgsq5kFJYI0g==}
+  kokoro-js@1.0.1:
+    resolution: {integrity: sha512-3PGcuPdX8gXnZcE397FHSTUp8cCH7wms2MxbSrqKhdRNbpO6FCTN/papFwIaCrdtQEJnyd7vPH9bgrMoJFXTnA==}
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -4599,7 +4599,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kokoro-js@1.0.0:
+  kokoro-js@1.0.1:
     dependencies:
       '@huggingface/transformers': 3.3.1
       phonemizer: 1.2.1

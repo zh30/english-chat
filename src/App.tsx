@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { Button } from './components/ui/button';
 import { Textarea } from './components/ui/textarea';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './components/ui/select';
 
 const model_id = "onnx-community/Kokoro-82M-ONNX";
+const voices = ["af", "af_bella", "af_nicole", "af_sarah", "af_sarah", "af_sky", "am_adam", "am_michael", "bf_emma", "bf_isabella", "bm_george", "bm_lewis"]
 
 function App() {
   const [loading, setLoading] = useState(false)
   const [generating, setGenerating] = useState(false)
   const [text, setText] = useState("Life is like a box of chocolates. You never know what you're gonna get.")
+  const [voice, setVoice] = useState("af")
+
   const workerRef = useRef<Worker | null>(null)
 
   const handleClick = useCallback(async () => {
@@ -17,10 +21,10 @@ function App() {
       type: 'generate',
       payload: {
         text,
-        voice: "af"
+        voice
       }
     });
-  }, [text])
+  }, [text, voice])
 
   useEffect(() => {
     const worker = new Worker(new URL('./tts.worker.ts', import.meta.url), {
@@ -69,7 +73,7 @@ function App() {
   }, []);
 
   return (
-    <div className='flex items-center justify-center h-screen'>
+    <div className='flex items-center justify-center h-screen p-4'>
       <div className='rounded-xl border bg-card text-card-foreground shadow container'>
         {loading && <div className='p-6 pb-0'>Loading model...</div>}
         <div className="grid w-full gap-2 p-6">
@@ -80,12 +84,27 @@ function App() {
             // className='resize-none'
             disabled={loading || generating}
           />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground opacity-50">
             Please enter English text
           </p>
-          <Button onClick={handleClick} disabled={loading || generating}>
-            {generating ? 'Generating...' : 'Generate'}
-          </Button>
+          <div className='flex flex-row gap-2'>
+            <Select value={voice} onValueChange={setVoice} disabled={loading || generating}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Voice</SelectLabel>
+                  {voices.map((voice) => (
+                    <SelectItem key={voice} value={voice} className='capitalize'>{voice}</SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Button onClick={handleClick} className='ml-auto' disabled={loading || generating}>
+              {generating ? 'Generating...' : 'Generate'}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
